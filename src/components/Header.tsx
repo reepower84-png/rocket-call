@@ -36,12 +36,22 @@ export default function Header() {
             로켓콜
           </span>
         </div>
-        <button
-          onClick={scrollToContact}
-          className="bg-accent-500 hover:bg-accent-600 text-white px-5 py-2 rounded-full font-medium transition-all hover:scale-105 shadow-lg"
-        >
-          무료 상담 신청
-        </button>
+        <div className="flex items-center gap-2 sm:gap-3">
+          <a
+            href="https://drive.google.com/file/d/1FGpJjks9asLnWIAS6wd7be0ARZDssLNM/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-primary-600 hover:bg-primary-700 text-white px-3 sm:px-5 py-2 rounded-full font-medium transition-all hover:scale-105 shadow-lg text-sm sm:text-base whitespace-nowrap"
+          >
+            제안서
+          </a>
+          <button
+            onClick={scrollToContact}
+            className="bg-accent-500 hover:bg-accent-600 text-white px-3 sm:px-5 py-2 rounded-full font-medium transition-all hover:scale-105 shadow-lg text-sm sm:text-base whitespace-nowrap"
+          >
+            무료 상담
+          </button>
+        </div>
       </div>
     </header>
   );
