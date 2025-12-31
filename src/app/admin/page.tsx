@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Inquiry } from "@/lib/supabase";
 
+const ADMIN_PASSWORD = "rocket2024";
+
 const statusLabels = {
   pending: "대기중",
   contacted: "연락완료",
@@ -19,6 +21,32 @@ export default function AdminPage() {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | Inquiry["status"]>("all");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const auth = sessionStorage.getItem("admin_auth");
+    if (auth === "true") {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      sessionStorage.setItem("admin_auth", "true");
+      setError("");
+    } else {
+      setError("비밀번호가 올바르지 않습니다.");
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    sessionStorage.removeItem("admin_auth");
+  };
 
   const fetchInquiries = async () => {
     try {
@@ -97,6 +125,44 @@ export default function AdminPage() {
     completed: inquiries.filter((i) => i.status === "completed").length,
   };
 
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="bg-white p-8 rounded-xl shadow-lg max-w-md w-full mx-4">
+          <div className="text-center mb-6">
+            <span className="text-4xl">🚀</span>
+            <h1 className="text-2xl font-bold text-gray-900 mt-2">로켓콜 어드민</h1>
+            <p className="text-gray-500 mt-1">관리자 로그인이 필요합니다</p>
+          </div>
+          <form onSubmit={handleLogin}>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                비밀번호
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="비밀번호를 입력하세요"
+                autoFocus
+              />
+            </div>
+            {error && (
+              <p className="text-red-500 text-sm mb-4">{error}</p>
+            )}
+            <button
+              type="submit"
+              className="w-full bg-primary-600 text-white py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
+            >
+              로그인
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -116,12 +182,20 @@ export default function AdminPage() {
                 로켓콜 어드민
               </h1>
             </div>
-            <a
-              href="/"
-              className="text-primary-600 hover:text-primary-700 font-medium"
-            >
-              랜딩페이지로 이동 →
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="/"
+                className="text-primary-600 hover:text-primary-700 font-medium"
+              >
+                랜딩페이지로 이동 →
+              </a>
+              <button
+                onClick={handleLogout}
+                className="text-gray-500 hover:text-gray-700 text-sm"
+              >
+                로그아웃
+              </button>
+            </div>
           </div>
         </div>
       </header>
