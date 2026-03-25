@@ -17,6 +17,10 @@ export default function Header() {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -26,7 +30,10 @@ export default function Header() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center gap-2">
+        <div
+          className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={scrollToTop}
+        >
           <span className="text-2xl">🚀</span>
           <span
             className={`font-bold text-xl ${
