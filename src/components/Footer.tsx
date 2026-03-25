@@ -3,7 +3,6 @@
 export default function Footer() {
   const affiliates = [
     { name: "로켓콜 인트로", url: "https://rk-intro.vercel.app/" },
-    { name: "로켓콜_보험설계사", url: "https://rocket-call.vercel.app/" },
     { name: "로켓콜_자동차딜러", url: "https://rocket-call-auto-dealer.vercel.app/" },
     { name: "로켓콜_부동산분양", url: "https://rocket-call-realestate.vercel.app/" },
     { name: "로켓콜_병원", url: "https://rocket-call-hospital.vercel.app/" },
