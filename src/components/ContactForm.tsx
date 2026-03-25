@@ -152,6 +152,15 @@ export default function ContactForm() {
                 {isSubmitting ? "제출 중..." : "무료 상담 신청하기"}
               </button>
 
+              <a
+                href="http://pf.kakao.com/_zxfugn/chat"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full bg-[#FEE500] hover:bg-[#F5DC00] text-[#191919] py-4 rounded-xl text-lg font-bold transition-all hover:scale-[1.02] shadow-lg text-center"
+              >
+                카카오톡으로 상담하기
+              </a>
+
               {submitStatus === "success" && (
                 <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl text-center">
                   ✅ 상담 신청이 완료되었습니다. 빠른 시일 내에 연락드리겠습니다!
