@@ -179,10 +179,6 @@ export default function SampleCalls() {
             );
           })}
         </div>
-
-        <p className="text-center text-gray-400 text-sm mt-10">
-          * 고객 동의를 받아 공개된 실제 상담 녹취이며, 개인정보는 일부 편집되었습니다.
-        </p>
       </div>
     </section>
   );
