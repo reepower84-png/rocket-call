@@ -24,7 +24,7 @@ export default function Products() {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section id="products" className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <span className="text-primary-600 font-semibold text-sm uppercase tracking-wide">
